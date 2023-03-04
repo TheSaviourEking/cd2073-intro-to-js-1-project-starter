@@ -75,9 +75,7 @@ function addProductToCart(productId){
 */
 
 function increaseQuantity(productId) {
-  let product = products.find(function(item) {
-    return item.productId === productId;
-  })
+  let product = findProductById(productId);
 
   product.quantity++;
 }
