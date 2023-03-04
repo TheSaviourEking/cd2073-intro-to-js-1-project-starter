@@ -14,7 +14,7 @@ const cherry = {
   price: 4,
   quantity: 0,
   productId: 1,
-  image: "/images/cherry.jpg"
+  image: "images/cherry.jpg"
 };
 
 const strawberry = {
@@ -47,12 +47,22 @@ const cart = [];
   - addProductToCart should then increase the product's quantity
   - if the product is not already in the cart, add it to the cart
 */
+
+// let findProduct = products.find((item) => item.productId === productId)
+function findProductById(productId) {
+  return products.find(product => product.productId === productId);
+}
+
+function findProductInCart(productId) {
+  return cart.find(product => product.productId === productId);
+}
+
 function addProductToCart(productId){
-  const product = products.find((item) => item.productId === productId);
+  let product = findProductById(productId);
 
-  const productInCart = cart.find((product) => product.productId === productId);
+  let productInCart = findProductInCart(productId);
 
-  product.quantity++;
+  product.quantity += 1;
 
   if (productInCart === undefined) {
     cart.push(product)
@@ -79,15 +89,15 @@ function increaseQuantity(productId) {
 */
 
 function decreaseQuantity(productId) {
-  let product = products.find(function(item) {
-    return item.productId === productId;
-  })
+  let product = findProductById(productId);
+  product.quantity -= 1;
 
+  
 
-  if (product.quantity <= 1) {
-      cart.splice(product, 1);
+  if (product.quantity === 0) {
+      removeProductFromCart(product.productId)
   }
-  product.quantity--;
+    
 }
 
 /* Create a function named removeProductFromCart that takes in the productId as an argument
@@ -97,15 +107,11 @@ function decreaseQuantity(productId) {
 */
 
 function removeProductFromCart(productId) {
-  let product = products.find(function(item) {
-    return item.productId === productId;
-  });
+  let product = findProductById(productId);
 
   product.quantity = 0;
-  if (product.quantity === 0) {
-      cart.splice(product, 1);
-  }
-  
+
+  cart.splice(cart.indexOf(product), 1);
 }
 
 /* Create a function named cartTotal that has no parameters
@@ -125,7 +131,7 @@ function cartTotal() {
 /* Create a function called emptyCart that empties the products from the cart */
 
 function emptyCart() {
-  cart = [];
+  cart.splice(0, cart.length);
 }
 
 /* Create a function named pay that takes in an amount as an argument
