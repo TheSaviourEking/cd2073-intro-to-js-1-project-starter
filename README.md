@@ -134,3 +134,5 @@ Step 7: [Optional] Add extra features
 ## License
 
 [License](LICENSE.txt)
+
+Checkout Live Site (https://thesavioureking.github.io/cd2073-intro-to-js-1-project-starter/starter/src/)
