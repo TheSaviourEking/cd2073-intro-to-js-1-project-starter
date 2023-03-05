@@ -137,10 +137,20 @@ function emptyCart() {
   - pay will return a positive number if money should be returned to customer
 */
 
+let totalPaid = 0;
+
 function pay(amount) {
   let total = cartTotal();
+  totalPaid += amount;
 
-  return (amount - total);
+  let remainingBalance =  total - totalPaid;
+  if (remainingBalance > 0) {
+    return -remainingBalance;
+  } else if (remainingBalance < 0) {
+    return -remainingBalance;
+  } else {
+    return 0;
+  }
 }
 
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
